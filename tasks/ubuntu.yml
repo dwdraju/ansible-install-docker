@@ -22,6 +22,14 @@
     url: https://download.docker.com/linux/ubuntu/gpg
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     state: present
+  register: add_key
+  ignore_errors: true
+
+- name: Add Docker apt key if failed
+  shell: "curl -sSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+  args:
+    warn: no
+  when: add_key|failed  
 
 - name: Add Docker stable repository.
   apt_repository:

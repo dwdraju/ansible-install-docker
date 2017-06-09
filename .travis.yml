@@ -1,0 +1,21 @@
+---
+dist: trusty
+sudo: required
+
+before_install:
+  # Make sure everything's up to date.
+  - sudo apt-get update -qq
+  - sudo apt install python-pip python-dev
+
+install:
+  # Install Ansible.
+  - pip install ansible markupsafe
+
+  # Add ansible.cfg to pick up roles path.
+  - echo -e "[defaults]\nroles_path = ../" >> ansible.cfg
+
+script:
+  - "ansible-playbook -i tests/inventory tests/test.yml --syntax-check"
+
+script:
+  - "ansible-playbook -i tests/inventory tests/test.yml --connection=local -b"
