@@ -1,0 +1,14 @@
+---
+- include: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install Docker
+  package:
+    name: "{{ docker_package }}"
+    state: present
+
+- name: Enable docker service at boot
+  service:
+    name: docker
+    state: started
+    enabled: yes

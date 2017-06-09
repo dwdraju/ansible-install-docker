@@ -1,0 +1,4 @@
+---
+# Choose Community Edition(ce) or Enterprise Edition(ee)
+docker_edition: 'ce'
+docker_package: "docker-{{ docker_edition }}"

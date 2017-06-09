@@ -1,0 +1,30 @@
+---
+- name: Remove older docker versions if present
+  apt:
+    pkg: '{{item}}'
+    state: absent
+  with_items:
+    - docker
+    - docker-engine
+
+- name: Ensure packages to allow apt to use repository over HTTPS
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: Add Docker's official apt key.
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+
+- name: Add Docker stable repository.
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
+    state: present
+    update_cache: yes
