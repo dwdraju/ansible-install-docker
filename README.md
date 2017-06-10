@@ -12,4 +12,4 @@ MIT
 
 ## Author Information
 
-This role was created in 2017 by [Raju Dawad](http://dwdraju.com.np/).
+This role was created in 2017 by [Raju Dawadi](http://dwdraju.com.np/).
